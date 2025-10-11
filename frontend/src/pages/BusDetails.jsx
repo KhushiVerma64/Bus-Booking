@@ -10,7 +10,7 @@ const BusDetails = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/buses/${id}`)
+      .get(`${import.meta.env.VITE_API_URL}/buses/${id}`)
       .then((res) => setBus(res.data))
       .catch((err) => console.error("Error fetching bus details:", err));
   }, [id]);

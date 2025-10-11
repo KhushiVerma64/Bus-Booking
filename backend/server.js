@@ -10,6 +10,11 @@ import bookingRoutes from "./routes/bookingRoutes.js";
 dotenv.config();
 connectDB();
 
+app.use(cors({
+  origin: ["bus-booking-teal.vercel.app"], // frontend URL
+  credentials: true, // allow cookies
+}));
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // for form data
