@@ -1,0 +1,195 @@
+/* === Reset === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family, Lato, sans-serif), Arial, sans-serif;
+  /* background-color: #395886; */
+}
+
+body {
+  padding-top: 70px;
+  /* same as navbar height */
+}
+
+/* navbar links  */
+.navbar {
+  position: fixed;
+  /* FIXED NAVBAR */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.nav-link {
+  margin-left: 40px;
+}
+
+.nav-link:hover {
+  color: #f84a4a !important;
+}
+
+.navbar-logo span {
+  font-size: 20px;
+  font-weight: bold;
+  color: red;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+/* === Home Page Background === */
+.home-container {
+  min-height: 100vh;
+  background-image: url("/media/BusBanner.webp");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* === login signup form === */
+.login-form {
+  height: 100vh;
+  background-image: url("/media/bg2.jpg");
+  background-size: cover;
+  padding: 70px;
+  border-radius: 20px;
+  box-shadow: 2px solid rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(30px);
+}
+
+.login-form h3 {
+  color: white;
+  font-weight: 700;
+}
+
+.login-form label {
+  color: white;
+  font-weight: 500;
+}
+
+.login-form input {
+  background-color: transparent;
+  font-size: 17px;
+  font-weight: 600;
+  color: white;
+  border: 3px solid white;
+  border-radius: 25px;
+}
+
+.login-form button {
+  border-radius: 20px;
+}
+
+.login-form button:hover {
+  background-color: white;
+  color: black;
+  font-weight: 700;
+  border-radius: 20px;
+  border: none;
+}
+
+.login-form a {
+  color: white;
+  font-size: 17px;
+}
+
+.card-body {
+  backdrop-filter: blur(30px);
+}
+
+/* === MY BOOKING ==== */
+.book {
+  background:#60A3D9;
+  color: white;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 15px;
+  transition: all 0.3s ease;
+  /* box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);  */
+  box-shadow: 0 0 15px black;
+}
+
+.card1:hover {
+  /* transform: translateY(-7px); */
+   box-shadow: 0 0 25px black;
+  /* box-shadow: 0 0 25px rgba(255, 215, 0, 0.7), 0 0 40px rgba(255, 223, 0, 0.4); */
+
+}
+
+/* === TICKET PAGE === */
+.ticket-card {
+  background:#60A3D9;
+  /* background: linear-gradient(145deg, #0a1a2f, #112b4a); */
+  color: #fff;
+  width: 400px;
+  margin: 60px auto;
+  border-radius: 16px;
+  padding: 25px 30px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* 🪄 Hover effect */
+.ticket-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px black;
+  /* box-shadow: 0 0 30px rgba(255, 215, 0, 0.6); */
+}
+
+/* ✂️ Dashed separator like a real ticket */
+.ticket-card::after {
+  content: "";
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 55px;
+  border-bottom: 1px dashed rgba(255, 215, 0, 0.6);
+}
+
+/* 🎟️ Ticket title */
+.ticket-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: gold;
+}
+
+/* 📄 Ticket details section */
+.ticket-details {
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.ticket-details span {
+  /* color: #ffd700; */
+  color: black;
+  font-weight: 500;
+}
+
+/* === SEARCH BUS === */
+.search{
+   box-shadow: 0 0 20px gray;
+  
+}
+
+.search:hover{
+ transform: translateY(-5px);
+  box-shadow: 0 0 15px black;
+}
