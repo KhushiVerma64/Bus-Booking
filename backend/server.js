@@ -12,7 +12,9 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://bus-booking-git-main-khushi-vermas-projects-0649901b.vercel.app"
+  "https://bus-booking-teal.vercel.app",
+  "https://bus-booking-git-main-khushi-vermas-projects-0649901b.vercel.app",
+  "https://bus-booking-f5raaiz2d-khushi-vermas-projects-0649901b.vercel.app"
 ];
 
 app.use(cors({
