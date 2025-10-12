@@ -14,49 +14,60 @@ const Login = () => {
   // 👇 Get previous page path from state
   const from = location.state?.from || "/";
 
+  const handleLogin = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await axios.post(
+      // "https://bus-booking-dn9k.onrender.com/api/auth/login",
+      `${import.meta.env.VITE_API_URL}/auth/login`,
+      { email, password }
+    );
+
+    // Save token in localStorage
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(res.data.user));
+
+    alert("Login successful ✅");
+
+    // Redirect back to where the user came from
+    setTimeout(() => {
+      navigate(from, { replace: true });
+    }, 1000);
+
+  } catch (error) {
+    console.error("Login Error:", error.response?.data || error.message);
+    alert("Login failed. Please check your credentials ❌");
+  }
+};
+
+
   // const handleLogin = async (e) => {
   //   e.preventDefault();
-  //   try {
-  //     const res = await API.post("/users/login", { email, password });
-  //     localStorage.setItem("token", res.data.token);
-  //     setMessage("Login successful ✅");
 
-  //     // ⏳ Redirect to the previous page or home
+  //   try {
+  //     const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
+  //       email,
+  //       password,
+  //     });
+
+  //     //  Save token in localStorage
+  //     localStorage.setItem("token", res.data.token);
+  //     localStorage.setItem("user", JSON.stringify(res.data.user));
+
+  //     alert("Login successful");
+
+  //     // Redirect to the previous page or home
   //     setTimeout(() => {
   //       navigate(from, { replace: true });
   //     }, 1000);
-  //   } catch (err) {
-  //     setMessage(err.response?.data?.message || "Login failed ❌");
+  //     navigate("/"); // redirect after login
+
+  //   } catch (error) {
+  //     console.error("Login Error:", err.response?.data || err.message);
+  //     alert("Login failed. Please check your credentials.");
   //   }
   // };
-
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
-        email,
-        password,
-      });
-
-      //  Save token in localStorage
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      alert("Login successful");
-
-      // Redirect to the previous page or home
-      setTimeout(() => {
-        navigate(from, { replace: true });
-      }, 1000);
-      navigate("/"); // redirect after login
-
-    } catch (error) {
-      console.error("Login Error:", err.response?.data || err.message);
-      alert("Login failed. Please check your credentials.");
-    }
-  };
 
   return (
     <div className="container login-form mt-5">

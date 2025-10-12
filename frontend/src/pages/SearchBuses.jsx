@@ -65,14 +65,6 @@ const SearchBuses = () => {
   return (
     <div
       className="container mt-5 pt-5 search-box"
-      // style={{
-      //   backgroundImage: 'url("/media/bg.png")',
-      //   backgroundSize: "cover",
-      //   backgroundPosition: "center",
-      //   backgroundAttachment: "fixed",
-      //   minHeight: "100vh",
-      //   paddingTop: "100px",
-      // }}
     >
       {/* Search Form */}
       <div className="row justify-content-center ">

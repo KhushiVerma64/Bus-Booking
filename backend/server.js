@@ -8,17 +8,30 @@ import busRoutes from "./routes/busRoutes.js";
 import bookingRoutes from "./routes/bookingRoutes.js";
 
 dotenv.config();
-connectDB();
+const app = express();
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://bus-booking-git-main-khushi-vermas-projects-0649901b.vercel.app"
+];
 
 app.use(cors({
-  origin: ["bus-booking-teal.vercel.app"], // frontend URL
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // Postman or curl requests
+    if (!allowedOrigins.includes(origin)) {
+      return callback(new Error("CORS Policy: Access Denied"), false);
+    }
+    return callback(null, true);
+  },
   credentials: true, // allow cookies
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
-const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // for form data
-app.use(cors());
+connectDB();
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/buses", busRoutes);

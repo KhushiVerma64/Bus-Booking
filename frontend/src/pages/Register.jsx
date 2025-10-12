@@ -15,10 +15,16 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
     console.log("Register Data:", formData); // ✅ for debugging
-    
-     try {
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register` , formData);
+
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, formData);
 
       if (res.data.token) {
         // save token in localStorage
@@ -37,7 +43,7 @@ const Register = () => {
     <div className="container login-form mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <div className="card shadow" style={{background:"transparent"}}>
+          <div className="card shadow" style={{ background: "transparent" }}>
             <div className="card-body">
               <h3 className="text-center  mb-4">Create Account</h3>
               <form onSubmit={handleSubmit}>
@@ -102,7 +108,7 @@ const Register = () => {
                   Register
                 </button>
               </form>
-              <p className="mt-3 text-center" style={{color:"white"}}>
+              <p className="mt-3 text-center" style={{ color: "white" }}>
                 Already have an account? <a href="/login">Login</a>
               </p>
             </div>
