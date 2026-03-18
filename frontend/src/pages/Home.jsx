@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -6,9 +7,14 @@ const Home = () => {
         <h1 className="display-4 fw-bold">Welcome to Yatra Setu</h1>
         <p className="lead">Book your bus tickets easily and quickly 🚍</p>
 
-        <div className="d-flex justify-content-center gap-3 mt-3">
+        {/* <div className="d-flex justify-content-center gap-3 mt-3">
           <a href="/search" className="btn btn-success btn-lg">Search Buses</a>
           <a href="/register" className="btn btn-danger btn-lg">Create Account</a>
+        </div> */}
+
+         <div className="d-flex justify-content-center gap-3 mt-3">
+          <Link to="/search" className="btn btn-success btn-lg">Search Buses</Link>
+          <Link to="/register" className="btn btn-danger btn-lg">Create Account</Link>
         </div>
 
         <div className="row mt-5">
