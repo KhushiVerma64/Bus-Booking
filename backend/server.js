@@ -34,6 +34,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // for form data
 connectDB();
 
+app.get("/", (req, res) => {
+  res.send("Bus Booking Backend is running ");
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/buses", busRoutes);
