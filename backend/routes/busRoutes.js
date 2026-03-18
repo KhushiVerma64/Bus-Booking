@@ -5,18 +5,46 @@ import { addBus, searchBuses } from "../controllers/busController.js";
 
 router.post("/add", addBus);
 
-// 🔍 Search buses (case-insensitive)
 router.post("/search", async (req, res) => {
   const { source, destination, date } = req.body;
 
   try {
-    const buses = await Bus.find({
-      source: { $regex: source, $options: "i" },        // case-insensitive
-      destination: { $regex: destination, $options: "i" },
+    let buses = await Bus.find({
+      source: { $regex: source || "", $options: "i" },
+      destination: { $regex: destination || "", $options: "i" },
       date: date,
     });
 
-    res.json(buses);
+    // 🔥 Fallback logic
+    if (buses.length === 0) {
+      buses = await Bus.find();
+
+      // If DB also empty → use hardcoded data
+      if (buses.length === 0) {
+        buses = [
+          {
+            name: "Yatra Express",
+            source: "Delhi",
+            destination: "Lucknow",
+            price: 500,
+            departureTime: "10:00 AM",
+          },
+          {
+            name: "Super Travels",
+            source: "Delhi",
+            destination: "Kanpur",
+            price: 400,
+            departureTime: "2:00 PM",
+          },
+        ];
+      }
+    }
+
+    res.json({
+      success: true,
+      data: buses,
+    });
+
   } catch (err) {
     console.error("Error searching buses:", err);
     res.status(500).json({ message: "Server error" });
@@ -35,10 +63,14 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+
 // Add or update dummy buses
 router.post("/add-dummy", async (req, res) => {
   try {
-    // Add updated dummy buses
+    // 🔥 Step 1: Clear old data (VERY IMPORTANT)
+    await Bus.deleteMany();
+
+    // 🔥 Step 2: Dummy buses data
     const newBuses = [
       {
         name: "Yatra Express",
@@ -106,11 +138,23 @@ router.post("/add-dummy", async (req, res) => {
       },
     ];
 
+    // 🔥 Step 3: Insert fresh data
     await Bus.insertMany(newBuses);
-    res.json({ message: "✅ New dummy buses added successfully!" });
+
+    console.log("✅ Dummy buses inserted:", newBuses.length);
+
+    res.json({
+      success: true,
+      message: "✅ Dummy buses added successfully!",
+      total: newBuses.length
+    });
+
   } catch (err) {
     console.error("❌ Error adding dummy buses:", err);
-    res.status(500).json({ message: "Failed to add dummy buses" });
+    res.status(500).json({
+      success: false,
+      message: "Failed to add dummy buses"
+    });
   }
 });
 

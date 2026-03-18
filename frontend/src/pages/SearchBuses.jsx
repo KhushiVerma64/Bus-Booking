@@ -17,18 +17,45 @@ const SearchBuses = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // // Search buses
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const res = await API.post("/buses/search", formData);
+  //     setBuses(res.data.data);
+  //     setMessage("");
+  //   } catch (err) {
+  //     console.error("Error fetching buses:", err);
+  //     setMessage("Error fetching buses");
+  //   }
+  // };
+
+
   // Search buses
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await API.post("/buses/search", formData);
-      setBuses(res.data);
+
+  try {
+    const res = await API.post("/buses/search", formData);
+
+    // Safely get buses from response
+    const busesData = res?.data?.data || [];
+
+    setBuses(busesData);
+
+    // Optional message
+    if (busesData.length === 0) {
+      setMessage("No exact buses found. Showing available buses.");
+    } else {
       setMessage("");
-    } catch (err) {
-      console.error("Error fetching buses:", err);
-      setMessage("Error fetching buses");
     }
-  };
+
+  } catch (err) {
+    console.error("Error fetching buses:", err);
+    setMessage("Unable to fetch buses. Please try again.");
+  }
+};
+
 
   // Seat selection
   const handleSeatSelect = (busId, seatNo) => {
